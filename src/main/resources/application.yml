@@ -1,0 +1,27 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: bootcamp-adventureworks-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: categories-service
+          uri: lb://BOOTCAMP-ADVENTUREWORKS-CATEGORIES
+          predicates:
+            - Path=/categories/**
+        - id: products-service
+          uri: lb://BOOTCAMP-ADVENTUREWORKS-PRODUCTS
+          predicates:
+            - Path=/products/**
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+#      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://192.168.0.7:8761/eureka
+
+  instance:
+    hostname: localhost
